@@ -22,15 +22,25 @@ function addBook(library, book) {
   }
 };
 
-function checkoutBook(library, book, genre) {
-  // console.log("<>>>>>>>", library.shelves[genre][0])
-  if (library.shelves[genre][0]?.title === book) {
-    library.shelves[genre].pop();
-    return `You have now checked out ${book} from the ${library.name}.`
-    } 
-    return `Sorry, there are currently no copies of ${book} available at the ${library.name}.`
-} 
+function checkoutBook(library, bookTitle, genre) {
+  var checkBook = library.shelves[genre].some(function(book){
+    return book.title  === bookTitle
+  })
+  
+  if (checkBook === true) {
+    library.shelves[genre].pop()
+    return `You have now checked out ${bookTitle} from the ${library.name}.`
+  } else {
+    return `Sorry, there are currently no copies of ${bookTitle} available at the ${library.name}.`
+  }
 
+  // // console.log("<>>>>>>>", library.shelves[genre][0])
+  // if (library.shelves[genre][0]?.title === book) {
+  //   library.shelves[genre].pop();
+  //   return `You have now checked out ${book} from the ${library.name}.`
+  //   } 
+  //   return `Sorry, there are currently no copies of ${book} available at the ${library.name}.`
+}
 function takeStock(library, genre) {
   // console.log("<>>>> LIBRARY", library)
   // console.log("<>>>> GENRE", genre)
